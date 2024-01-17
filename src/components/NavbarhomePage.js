@@ -44,7 +44,7 @@ import React, { Component } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-
+import { faUserTie } from '@fortawesome/free-solid-svg-icons';
 class MyNavbar extends Component {
     // constructor(props) {
     //     super(props);
@@ -79,6 +79,7 @@ class MyNavbar extends Component {
                             <a href="/">
                                 <FontAwesomeIcon icon={faCartShopping} className='font-awe' />
                             </a>
+                            <a href='/admin'><FontAwesomeIcon icon={faUserTie} className='font-awe' /></a>
                         </div>
                     </div>
                 </div>

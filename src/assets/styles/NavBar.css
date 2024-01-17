@@ -69,6 +69,11 @@
     filter: brightness(10%);
 }
 
+.cart-div>a {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
 .nav-item {
     margin-left: 30px;
     text-decoration: none;
@@ -82,6 +87,7 @@
 }
 
 .cart-div {
+
     display: flex;
     justify-content: center;
     align-items: center;
