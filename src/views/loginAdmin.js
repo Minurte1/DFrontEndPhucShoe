@@ -3,10 +3,38 @@
 import React, { useState } from 'react';
 import '../assets/styles/LoginAdmin.css'; // Hãy chắc chắn bạn đã tạo file App.css cho các kiểu của bạn
 import { useEffect } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isToggled, setToggled] = useState(false);
+    const [data, setAdmin] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get("http://localhost:3003/api/v1/admin");
+
+                setAdmin({
+                    data: response.data.admin,
+
+                    loading: false,
+                });
+
+                console.log(response.data);
+            } catch (error) {
+                console.error(error.message);
+                setAdmin({
+                    error: error.message,
+                    loading: false,
+                });
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -32,7 +60,7 @@ const LoginForm = () => {
         }
 
     };
-
+    const [mess1, setMess] = useState('');
     useEffect(() => {
         const handleClickOutside = (event) => {
             const input = document.getElementById('email');
@@ -57,21 +85,43 @@ const LoginForm = () => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
-    const handleLogin = () => {
-        const taikhoan = 'hoangphuc@gmail.com';
-        const matkhau = '123';
 
-        if (taikhoan === email && matkhau === password) {
-            window.location.href = 'https://www.facebook.com/minute2701/';
-        } else {
-            alert('Hỏi thật, mày biết cách đăng nhập không hả?????');
+    const handleLogin = async () => {
+        const taikhoan = document.getElementById('email').value;
+
+        const matkhau = document.getElementById('pass').value;
+
+        try {
+            const response = await axios.post('http://localhost:3003/api/v1/admin', {
+                taikhoanAdmin: taikhoan,
+                matkhauAdmin: matkhau,
+            });
+            console.log(response.data.message)
+            if (response.data.message === "UnCook") {
+                console.log("OKe")
+
+                toast.success("Đăng Nhập Thành Công")
+                setTimeout(() => {
+                    navigate(`/nam-sanpham`);
+                }, 1000);
+
+
+            }
+
+
+
+
+        } catch (error) {
+            toast.error("Đăng Nhập Thất Bại");
         }
     };
 
     const handleGoogleLogin = () => {
         window.location.href = 'https://accounts.google.com/o/oauth2/auth?response_type=code&access_type=online&client_id=1045948776443-tm14dk8uqouu5k1dp7hrnpafhg00cafg.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fgateway73zncdk1.monfansubvn.com%2Fapi%2Fv2%2Fserver%2Foauth%2Fgoogle&state&scope=email%20profile&approval_prompt=auto';
     };
-
+    console.log('check mess', mess1)
+    console.log(data)
+    const navigate = useNavigate();
     return (
         <div className={` container-LoginAdmin ${isToggled ? 'dark-mode' : ''}`}>
             <div className="containerLogin">
@@ -135,7 +185,7 @@ const LoginForm = () => {
                             />
                         </div>
                         <br />
-                        <button type="submit" className="dangnhap" id="dangnhap" onClick={handleLogin}>
+                        <button type="submit" className="dangnhap" id="dangnhap" onClick={() => handleLogin(navigate)}>
                             Đăng Nhập
                         </button>
                         <p className="hoac">- hoặc -</p>

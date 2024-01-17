@@ -43,7 +43,7 @@ root.render(
         <Route path="/tatca-sanpham" element={<><AllSP></AllSP></>} />
         <Route path="/nu-sanpham" element={<><SPNu></SPNu></>} />
         <Route path="/nam-sanpham" element={<><SPNam></SPNam></>} />
-
+        
       </Routes>
     </Router>
     <ToastContainer
