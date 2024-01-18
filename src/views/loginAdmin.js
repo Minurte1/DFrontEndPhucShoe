@@ -85,7 +85,7 @@ const LoginForm = () => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
-
+    const [isLoggedIn, setLoggedIn] = useState(false);
     const handleLogin = async () => {
         const taikhoan = document.getElementById('email').value;
 
@@ -99,11 +99,12 @@ const LoginForm = () => {
             console.log(response.data.message)
             if (response.data.message === "UnCook") {
                 console.log("OKe")
-
+                const rand1 = Math.floor(Math.random() * 20);
+                setLoggedIn(true);
                 toast.success("Đăng Nhập Thành Công")
                 setTimeout(() => {
-                    navigate(`/nam-sanpham`);
-                }, 1000);
+                    navigate(`/PageAdmin`);
+                }, 500);
 
 
             }

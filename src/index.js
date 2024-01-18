@@ -19,6 +19,8 @@ import SPNu from './views/SpNu';
 import SPNam from './views/SpNam'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PageAdmin from './views/PageAdmin';
+// import AuthenticatedRoute from './components/process/AuthenticatedRoute';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -43,7 +45,8 @@ root.render(
         <Route path="/tatca-sanpham" element={<><AllSP></AllSP></>} />
         <Route path="/nu-sanpham" element={<><SPNu></SPNu></>} />
         <Route path="/nam-sanpham" element={<><SPNam></SPNam></>} />
-        
+        {/* <Route path="/PageAdmin/:id" element={<> <PageAdmin></PageAdmin></>} /> */}
+
       </Routes>
     </Router>
     <ToastContainer
