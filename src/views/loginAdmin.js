@@ -97,7 +97,7 @@ const LoginForm = () => {
                 matkhauAdmin: matkhau,
             });
             console.log(response.data.message)
-            if (response.data.message === "UnCook") {
+            if (response.data.Login) {
                 console.log("OKe")
                 const rand1 = Math.floor(Math.random() * 20);
                 setLoggedIn(true);
